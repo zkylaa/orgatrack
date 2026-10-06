@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OrgaTrack – Event</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="wrap">
+  <div class="topbar dua">
+    <a class="btn ghost" href="/">Kembali ke beranda</a>
+    <button class="btn ghost" id="keluar">Keluar</button>
+  </div>
+
+  <header class="head rise">
+    <span class="chip" id="ePeran"></span>
+    <h1 id="eNama">Memuat...</h1>
+    <p id="eMeta"></p>
+  </header>
+
+  <nav class="tabs2" id="tabs2" aria-label="Menu event">
+    <button class="on" data-v="vDash">Dashboard</button>
+    <button data-v="vPanitia">Panitia &amp; Divisi</button>
+    <button data-v="vTugas">Task Board</button>
+    <button data-v="vAnggaran">Anggaran</button>
+    <button data-v="vRapat">Rapat</button>
+  </nav>
+
+  <section id="vDash"></section>
+  <section id="vPanitia" hidden></section>
+  <section id="vTugas" hidden></section>
+  <section id="vAnggaran" hidden></section>
+  <section id="vRapat" hidden></section>
+</main>
+
+<div class="ov" id="ovDiv">
+  <form class="mod" id="fDiv" novalidate>
+    <h3 id="tDiv">Tambah divisi</h3>
+    <label>Nama divisi<input name="nama" maxlength="100"></label>
+    <p class="err" id="eDiv" role="alert"></p>
+    <div class="mrow">
+      <button type="button" class="btn ghost" data-tutup>Batal</button>
+      <button class="btn">Simpan</button>
+    </div>
+  </form>
+</div>
+
+<div class="ov" id="ovTugas">
+  <form class="mod" id="fTugas" novalidate>
+    <h3>Buat tugas</h3>
+    <label>Judul tugas<input name="judul" maxlength="150"></label>
+    <label>Deskripsi (opsional)<textarea name="deskripsi" rows="2"></textarea></label>
+    <label>Divisi<select name="division_id"></select></label>
+    <label>Penanggung jawab<select name="pj_id"></select></label>
+    <label>Deadline<input name="deadline" type="date"></label>
+    <label>Prioritas
+      <select name="prioritas">
+        <option value="rendah">Rendah</option>
+        <option value="sedang" selected>Sedang</option>
+        <option value="tinggi">Tinggi</option>
+      </select>
+    </label>
+    <p class="err" id="eTugas" role="alert"></p>
+    <div class="mrow">
+      <button type="button" class="btn ghost" data-tutup>Batal</button>
+      <button class="btn">Buat tugas</button>
+    </div>
+  </form>
+</div>
+
+<div class="ov" id="ovDetail"><div class="mod lebar" id="detail"></div></div>
+
+<div class="ov" id="ovPos">
+  <form class="mod" id="fPos" novalidate>
+    <h3 id="tPos">Tambah pos anggaran</h3>
+    <label>Nama pos<input name="nama_pos" maxlength="100" placeholder="Contoh: Konsumsi"></label>
+    <label>Nominal rencana (Rp)<input name="jumlah_rencana" type="number" min="1" step="1"></label>
+    <label>Divisi (opsional)<select name="division_id"></select></label>
+    <p class="err" id="ePos" role="alert"></p>
+    <div class="mrow">
+      <button type="button" class="btn ghost" data-tutup>Batal</button>
+      <button class="btn">Simpan</button>
+    </div>
+  </form>
+</div>
+
+<div class="ov" id="ovMasuk">
+  <form class="mod" id="fMasuk" novalidate>
+    <h3>Catat pemasukan</h3>
+    <label>Sumber dana<input name="sumber" maxlength="100" placeholder="Kas, sponsor, atau iuran"></label>
+    <label>Nominal (Rp)<input name="nominal" type="number" min="1" step="1"></label>
+    <label>Tanggal<input name="tanggal" type="date"></label>
+    <p class="err" id="eMasuk" role="alert"></p>
+    <div class="mrow">
+      <button type="button" class="btn ghost" data-tutup>Batal</button>
+      <button class="btn">Simpan</button>
+    </div>
+  </form>
+</div>
+
+<div class="ov" id="ovKeluar">
+  <form class="mod" id="fKeluar" novalidate>
+    <h3>Ajukan pengeluaran</h3>
+    <label>Pos anggaran<select name="budget_item_id"></select></label>
+    <label>Keterangan<input name="keterangan" maxlength="255" placeholder="Contoh: Beli snack peserta"></label>
+    <label>Nominal (Rp)<input name="nominal" type="number" min="1" step="1"></label>
+    <label>Tanggal pengeluaran<input name="tanggal" type="date"></label>
+    <label>Foto nota (JPG, PNG, atau PDF, maksimal 2 MB)
+      <input name="nota" type="file" accept=".jpg,.jpeg,.png,.pdf,image/jpeg,image/png,application/pdf">
+    </label>
+    <p class="err" id="eKeluar" role="alert"></p>
+    <div class="mrow">
+      <button type="button" class="btn ghost" data-tutup>Batal</button>
+      <button class="btn" id="kirimKeluar">Ajukan</button>
+    </div>
+  </form>
+</div>
+
+<div class="ov" id="ovTolak">
+  <form class="mod" id="fTolak" novalidate>
+    <h3>Tolak pengeluaran</h3>
+    <label>Alasan penolakan<textarea name="catatan" rows="3" maxlength="500"></textarea></label>
+    <p class="err" id="eTolak" role="alert"></p>
+    <div class="mrow">
+      <button type="button" class="btn ghost" data-tutup>Batal</button>
+      <button class="btn">Tolak pengeluaran</button>
+    </div>
+  </form>
+</div>
+
+<div class="ov" id="ovRapat">
+  <form class="mod" id="fRapat" novalidate>
+    <h3>Jadwalkan rapat</h3>
+    <label>Judul rapat<input name="judul" maxlength="150" placeholder="Contoh: Rapat evaluasi mingguan"></label>
+    <label>Waktu mulai<input name="waktu" type="datetime-local"></label>
+    <label>Lokasi atau link<input name="lokasi" maxlength="255" placeholder="Ruang rapat atau link Meet/Zoom"></label>
+    <label>Agenda (opsional)<textarea name="agenda" rows="3" maxlength="2000"></textarea></label>
+    <div>Peserta<div class="pilih" id="pilihPeserta"></div></div>
+    <p class="err" id="eRapat" role="alert"></p>
+    <div class="mrow">
+      <button type="button" class="btn ghost" data-tutup>Batal</button>
+      <button class="btn">Jadwalkan</button>
+    </div>
+  </form>
+</div>
+
+<div class="ov" id="ovRapatDetail"><div class="mod lebar" id="detailRapat"></div></div>
+
+<div class="ov" id="ovAksi">
+  <form class="mod" id="fAksi" novalidate>
+    <h3>Jadikan tugas</h3>
+    <p class="sub" id="aksiTeks"></p>
+    <label>Divisi<select name="division_id"></select></label>
+    <label>Penanggung jawab<select name="pj_id"></select></label>
+    <label>Deadline<input name="deadline" type="date"></label>
+    <label>Prioritas
+      <select name="prioritas">
+        <option value="rendah">Rendah</option>
+        <option value="sedang" selected>Sedang</option>
+        <option value="tinggi">Tinggi</option>
+      </select>
+    </label>
+    <p class="err" id="eAksi" role="alert"></p>
+    <div class="mrow">
+      <button type="button" class="btn ghost" id="batalAksi">Batal</button>
+      <button class="btn">Buat tugas</button>
+    </div>
+  </form>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+<script src="event.js"></script>
+<script src="anggaran.js"></script>
+<script src="rapat.js"></script>
+</body>
+</html>

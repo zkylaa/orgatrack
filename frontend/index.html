@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OrgaTrack – Beranda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="wrap">
+    <div class="topbar">
+  <button class="btn ghost" id="btnGabung">Gabung dengan kode</button>
+  <button class="btn" id="btnBuat">Buat event</button>
+  <button class="btn ghost" id="keluar">Keluar</button>
+</div>
+    <header class="head rise">
+      <span class="chip">Semester Ganjil 2026/2027</span>
+      <h1>Halo, <span id="nama"></span>!</h1>
+      <p>Pantau semua kepanitiaanmu di satu tempat: tugas, anggaran, dan rapat selalu terbaru.</p>
+    </header>
+
+    <h2 class="judul rise" style="--i:2">Kepanitiaan Saya</h2>
+    <div id="grid" class="grid">Memuat...</div>
+  </main>
+  <div class="ov" id="ovBuat">
+  <form class="mod" id="fBuat" novalidate>
+    <h3>Buat event baru</h3>
+    <p>Kamu otomatis menjadi Ketua Panitia, dan empat divisi awal dibuat untukmu.</p>
+    <label>Nama event<input name="nama" maxlength="150"></label>
+    <label>Tanggal pelaksanaan<input name="tanggal" type="date"></label>
+    <label>Lokasi<input name="lokasi" maxlength="150"></label>
+    <label>Deskripsi (opsional)<textarea name="deskripsi" rows="3"></textarea></label>
+    <p class="err" id="eBuat" role="alert"></p>
+    <div class="mrow"><button type="button" class="btn ghost" data-tutup>Batal</button><button class="btn">Buat event</button></div>
+  </form>
+</div>
+
+<div class="ov" id="ovGabung">
+  <div class="mod">
+    <h3>Gabung dengan kode</h3>
+    <div id="g1">
+      <p>Masukkan 6 karakter kode undangan dari Ketua Panitia.</p>
+      <input id="kode" class="kode-in" maxlength="6" placeholder="••••••" autocomplete="off">
+      <p class="err" id="eKode" role="alert"></p>
+      <div class="mrow"><button class="btn ghost" data-tutup>Batal</button><button class="btn" id="cek">Cek kode</button></div>
+    </div>
+    <div id="g2" hidden>
+      <p>Kamu diundang ke event ini:</p>
+      <div class="info"><b id="gNama"></b><span id="gMeta"></span></div>
+      <p class="err" id="eGabung" role="alert"></p>
+      <div class="mrow"><button class="btn ghost" id="tolak">Tolak</button><button class="btn" id="terima">Terima undangan</button></div>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
